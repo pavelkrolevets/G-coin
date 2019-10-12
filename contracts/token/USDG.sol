@@ -5,7 +5,7 @@ import './GRC20/GRC20Pausable.sol';
 import './GRC20/GRC20Burnable.sol';
 import './GRC20/GRC20TransferOSable.sol';
  
-contract USDG is GRC20Mintable, GRC20Pausable, GRC20Burnable, GRC20TransferOSabel{
+contract USDG is GRC20, GRC20Mintable, GRC20Pausable, GRC20Burnable, GRC20TransferOSabel{
     string private _name;
     string private _symbol;
     uint8 private _decimals;

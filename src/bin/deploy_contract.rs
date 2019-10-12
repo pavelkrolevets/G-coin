@@ -5,7 +5,7 @@ extern crate web3;
 
 use web3::contract::{Contract, Options};
 use web3::futures::Future;
-use web3::types::{Address, U256};
+use web3::types::{Address, U256, U64};
 
 fn main() {
     env_logger::init();
@@ -25,31 +25,31 @@ fn main() {
         .options(Options::with(|opt| {
             opt.value = Some(5.into());
             opt.gas_price = Some(5.into());
-            opt.gas = Some(1_000_000.into());
+            opt.gas = Some(3_000_000.into());
         }))
         .execute(
             bytecode,
-            (U256::from(1_000_000), "My Token".to_owned(), 3u64, "MT".to_owned()),
+            ("My Token".to_owned(), "MT".to_owned(), U256::from(2), U256::from(1_000_000), my_account),
             my_account,
         )
         .expect("Correct parameters are passed to the constructor.")
         .wait()
         .unwrap();
 
-    let result = contract.query("balanceOf", (my_account,), None, Options::default(), None);
-    let balance_of: U256 = result.wait().unwrap();
-    assert_eq!(balance_of, 1_000_000.into());
-
-    // Accessing existing contract
-    let contract_address = contract.address();
-    let contract = Contract::from_json(
-        web3.eth(),
-        contract_address,
-        include_bytes!("./contract/USDG.json"),
-    )
-        .unwrap();
-
-    let result = contract.query("balanceOf", (my_account,), None, Options::default(), None);
-    let balance_of: U256 = result.wait().unwrap();
-    assert_eq!(balance_of, 1_000_000.into());
+//    let result = contract.query("balanceOf", (my_account,), None, Options::default(), None);
+//    let balance_of: U256 = result.wait().unwrap();
+//    assert_eq!(balance_of, 1_000_000.into());
+//
+//    // Accessing existing contract
+//    let contract_address = contract.address();
+//    let contract = Contract::from_json(
+//        web3.eth(),
+//        contract_address,
+//        include_bytes!("./contract/USDG.json"),
+//    )
+//        .unwrap();
+//
+//    let result = contract.query("balanceOf", (my_account,), None, Options::default(), None);
+//    let balance_of: U256 = result.wait().unwrap();
+//    assert_eq!(balance_of, 1_000_000.into());
 }

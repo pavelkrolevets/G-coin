@@ -25,8 +25,10 @@ fn main() {
         include_bytes!("./contract/USDG.json"),
     )
         .unwrap();
-
-    let result = contract.query("balanceOf", (my_account,), None, Options::default(), None);
+    let transfer_to: Address = "75df5695686338883675bb27bd06fc7578aa01b7".parse().unwrap();
+    let result = contract.call("transfer", (transfer_to, U256::from(100)), my_account, Options::default());
+    println!("{}", result.wait().unwrap());
+    let result = contract.query("balanceOf", (transfer_to,), None, Options::default(), None);
     let balance_of: U256 = result.wait().unwrap();
     println!("{}",balance_of);
 }
