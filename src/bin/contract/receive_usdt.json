@@ -1,0 +1,24 @@
+[
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "check_balance",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      }
+    ],
+    "name": "Recived",
+    "type": "event"
+  }
+]
